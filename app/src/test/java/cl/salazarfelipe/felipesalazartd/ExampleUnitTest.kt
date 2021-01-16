@@ -1,17 +1,22 @@
 package cl.salazarfelipe.felipesalazartd
 
+import cl.salazarfelipe.felipesalazartd.model.bookConverter
+import cl.salazarfelipe.felipesalazartd.model.detailBookConverter
+import cl.salazarfelipe.felipesalazartd.model.pojo.Book
+import cl.salazarfelipe.felipesalazartd.model.pojo.BookDetail
 import org.junit.Test
 
 import org.junit.Assert.*
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 class ExampleUnitTest {
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun TestDetailConverter() {
+        //Given
+        val bookDetail = BookDetail(1, "mauricio", "chile", "http://", "Español", "http://2", 1, "nose", 2000, 2000, 3000, true)
+        //When
+        val response = detailBookConverter(bookDetail)
+        //Then
+        assert(response.id == bookDetail.id)
     }
 }
