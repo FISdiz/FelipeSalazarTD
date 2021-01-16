@@ -38,6 +38,8 @@
             android:textColor="@color/primary_text"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/det_image"
             app:layout_constraintTop_toTopOf="@+id/det_image" />
 
@@ -267,24 +269,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/det_lastp" />
 
-        <TextView
-            android:id="@+id/more_info"
+        <Button
+            android:id="@+id/det_link_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/more_info"
-            app:layout_constraintStart_toStartOf="@+id/det_pages"
-            app:layout_constraintTop_toTopOf="@+id/det_buy_button" />
-
-        <TextView
-            android:id="@+id/det_link"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textAlignment="textStart"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/more_info"
-            app:layout_constraintTop_toBottomOf="@+id/more_info" />
+            android:drawableTop="@drawable/link32x32"
+            android:text="@string/more_information"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/price"
+            app:layout_constraintTop_toBottomOf="@+id/det_price" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

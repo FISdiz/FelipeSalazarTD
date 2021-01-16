@@ -1,6 +1,5 @@
 package cl.salazarfelipe.felipesalazartd.view
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -64,7 +63,6 @@ class BookDetailFragment : Fragment() {
                 det_year.text = it.pages.toString()
                 det_price.text = it.pages.toString()
                 det_lastp.text = it.lastPrice.toString()
-                det_link.text = it.link
 
                 Picasso
                     .get()
@@ -94,6 +92,19 @@ class BookDetailFragment : Fragment() {
                         .setAction("Action", null)
                         .show()
                     email()
+                }
+
+                fun openURL()  {
+                    var url = it.link
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    this.startActivity(intent)
+                }
+
+                det_link_button.setOnClickListener {
+                    Snackbar.make(view,"web", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null)
+                        .show()
+                    openURL()
                 }
             }
         })
