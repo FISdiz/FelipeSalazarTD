@@ -1,6 +1,8 @@
 package cl.salazarfelipe.felipesalazartd.view
 
-import android.graphics.Color
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import cl.salazarfelipe.felipesalazartd.R
 import cl.salazarfelipe.felipesalazartd.viewmodel.BookViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_book_detail.*
@@ -55,6 +58,13 @@ class BookDetailFragment : Fragment() {
             if (it != null) {
                 det_title.text = it.title
                 det_author.text = it.author
+                det_country.text = it.country
+                det_language.text = it.language
+                det_pages.text = it.pages.toString()
+                det_year.text = it.pages.toString()
+                det_price.text = it.pages.toString()
+                det_lastp.text = it.lastPrice.toString()
+                det_link.text = it.link
 
                 Picasso
                     .get()
@@ -65,25 +75,29 @@ class BookDetailFragment : Fragment() {
                     .load(it.imageLink)
                     .transform(BlurTransformation(context,25,1))
                     .into(det_image_blur)
+
+                fun email() {
+                    val intent = Intent(Intent.ACTION_SEND)
+                    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("ventas@anchorBooks.cl"))
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Consulta por libro ${it.title} , ID : ${it.id} ")
+                    intent.putExtra(Intent.EXTRA_TEXT,
+                        " “Hola\n" +
+                            "Vi el libro ${it.title} de código ${it.id} y me gustaría que me contactaran a este correo o al siguiente número _________\n" +
+                            "Quedo atento."
+                    )
+                    intent.type = "message/rfc822"
+                    startActivity(Intent.createChooser(intent, "Choose an email client"))
+                }
+
+                det_buy_button.setOnClickListener { view ->
+                    Snackbar.make(view, "Email", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null)
+                        .show()
+                    email()
+                }
             }
         })
     }
 }
-            /*fun email() {
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("ensayoPrueba@gmail.com"))
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Consulta por ${it.name} , ID : ${it.id} ")
-                intent.putExtra(Intent.EXTRA_TEXT, " “Estimados\n" +
-                        "Buen día, vi el producto ${it.name} y me gustaría que me contactaran a este correo o al\n" +
-                        "siguiente número _________")
-                intent.type = "message/rfc822"
-                startActivity(Intent.createChooser(intent, "Choose an email client"))
-            }
 
-            fab.setOnClickListener { view ->
-                Snackbar.make(view, "Email", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .show()
-                email()
-            }
-        })*/
+
